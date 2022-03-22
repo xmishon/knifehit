@@ -5,7 +5,7 @@ namespace knifehit
     class Knife : MonoBehaviour
     {
         public event System.Action knifeHit;
-        public event System.Action gameLoose;
+        public event System.Action gameOver;
 
         private bool isHit = false;
 
@@ -23,7 +23,7 @@ namespace knifehit
                 else
                 {
                     gameObject.GetComponent<Collider2D>().enabled = false;
-                    gameLoose?.Invoke();
+                    gameOver?.Invoke();
                     gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(2.0f, -5.0f), ForceMode2D.Impulse);
                     gameObject.GetComponent<Rigidbody2D>().AddTorque(-4.0f, ForceMode2D.Impulse);
                 }
