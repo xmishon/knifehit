@@ -15,3 +15,7 @@ MonoBehaviour:
   logName: Golden barrel
   logIcon: {fileID: 21300000, guid: d8d69dc4a978bc64bbc5baea47e849f0, type: 3}
   logSprite: {fileID: 21300000, guid: d8d69dc4a978bc64bbc5baea47e849f0, type: 3}
+  destroyedSprites:
+  - {fileID: 21300000, guid: f590cc27cce7cbd45a58fc42aad0bc7f, type: 3}
+  - {fileID: 21300000, guid: 327a615668beda44ca046f3dfeaffc2c, type: 3}
+  - {fileID: 21300000, guid: e0b496365882e4e4988856c5826578be, type: 3}

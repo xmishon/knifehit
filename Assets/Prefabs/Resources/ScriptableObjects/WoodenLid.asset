@@ -15,3 +15,7 @@ MonoBehaviour:
   logName: Wooden lid
   logIcon: {fileID: 21300000, guid: d0076c7661112104fb08415eca9794cd, type: 3}
   logSprite: {fileID: 21300000, guid: d0076c7661112104fb08415eca9794cd, type: 3}
+  destroyedSprites:
+  - {fileID: 21300000, guid: dde24f7be0badc143ba4329867729303, type: 3}
+  - {fileID: 21300000, guid: 900248893e811b042b28eafcaa7c2924, type: 3}
+  - {fileID: 21300000, guid: 0ed23cf17285a4640bc2907f8e18fe48, type: 3}

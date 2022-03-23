@@ -15,3 +15,7 @@ MonoBehaviour:
   logName: Cheese boss
   logIcon: {fileID: 21300000, guid: abfa760bd32744c46a7cd0ea293aa446, type: 3}
   logSprite: {fileID: 21300000, guid: abfa760bd32744c46a7cd0ea293aa446, type: 3}
+  destroyedSprites:
+  - {fileID: 21300000, guid: 67f8ffa64762c3a4797b61d9848560ee, type: 3}
+  - {fileID: 21300000, guid: a3f3f18c259660e4199bc20933667a9a, type: 3}
+  - {fileID: 21300000, guid: 0aaf1d7b76010084dbcf2335809d5919, type: 3}
