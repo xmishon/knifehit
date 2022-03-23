@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace knifehit
 {
@@ -19,7 +20,9 @@ namespace knifehit
         [SerializeField]
         private GameObject _gameUIObj;
         [SerializeField]
-        private GameObject _mainMenu;
+        private GameObject _gameOverMenu;
+        [SerializeField]
+        private Text _gameOverText;
 
         private GameUI _gameUI;
         private Log _log;
@@ -35,6 +38,7 @@ namespace knifehit
         private int _hitsToWin;
         private int _currHitsNum;
         private Timer _timer;
+        private int _logSpriteNum;
 
         public void StartNewGame()
         {
@@ -96,20 +100,22 @@ namespace knifehit
             if (_currentLevel % 5 == 0)
             {
                 _isBoss = true;
-                _logSpriteRenderer.sprite = _bossLogs[Random.Range(0, _bossLogs.Count)].logSprite;
+                _logSpriteNum = Random.Range(0, _bossLogs.Count);
+                _logSpriteRenderer.sprite = _bossLogs[_logSpriteNum].logSprite;
                 _hitsToWin = Random.Range(_settings.knifeNumMinBoss, _settings.knifeNumMaxBoss);
             }
             else
             {
                 _isBoss = false;
-                int n = Random.Range(0, _logs.Count);
-                _logSpriteRenderer.sprite = _logs[n].logSprite;
+                _logSpriteNum = Random.Range(0, _logs.Count);
+                _logSpriteRenderer.sprite = _logs[_logSpriteNum].logSprite;
                 _hitsToWin = Random.Range(_settings.knifeNumMin, _settings.knifeNumMax);
             }
-            for(int i = 0; i < _logGO.transform.GetChildCount(); i++)
+            for(int i = 0; i < _logGO.transform.childCount; i++)
             {
                 Destroy(_logGO.transform.GetChild(i).gameObject);
             }
+            _logSpriteRenderer.enabled = true;
             _gameUI.SetupKnifeCount(_hitsToWin);
             AddKnife();
         }
@@ -126,11 +132,35 @@ namespace knifehit
                 StartCoroutine(DestroyWithDelay(1.0f, _currentKnife));
                 StartCoroutine(InitializeLevelWithDelay(1.0f));
                 _currentKnife = null;
+                SpawnDestroyedLog();
+                _logGO.GetComponent<SpriteRenderer>().enabled = false;
+                for (int i = 0; i < _logGO.transform.childCount; i++)
+                {
+                    Vector2 random = new Vector2(Random.Range(-3.0f, 3.0f), Random.Range(-6.0f, 6.0f));
+                    _logGO.transform.GetChild(i).GetComponent<Rigidbody2D>().AddForce(random, ForceMode2D.Impulse);
+                    _logGO.transform.GetChild(i).GetComponent<Rigidbody2D>().AddTorque(Random.Range(-4.0f, 4.0f), ForceMode2D.Impulse);
+                }
             }
             else
             {
                 _currentKnife = null;
                 StartCoroutine(AddKnifeWithDelay(0.1f));
+            }
+        }
+
+        private void SpawnDestroyedLog()
+        {
+            _logSpriteRenderer.enabled = false;
+            GameObject destroyedLog = Instantiate<GameObject>(Resources.Load<GameObject>(Names.DESTROYED_LOG));
+            destroyedLog.transform.position = _logGO.transform.position;
+            destroyedLog.transform.rotation = _logGO.transform.rotation;
+            if (_isBoss)
+            {
+                destroyedLog.GetComponent<DestroyedLog>().SetSprites(_bossLogs[_logSpriteNum].destroyedSprites);
+            }
+            else
+            {
+                destroyedLog.GetComponent<DestroyedLog>().SetSprites(_logs[_logSpriteNum].destroyedSprites);
             }
         }
 
@@ -148,6 +178,9 @@ namespace knifehit
 
         private void OnGameOver()
         {
+            _currentKnife.GetComponent<Knife>().knifeHit -= OnKnifeHit;
+            _currentKnife.GetComponent<Knife>().gameOver -= OnGameOver;
+            _currentKnife = null;
             StartCoroutine(OnGameOverWithDelay(1.5f));
         }
 
@@ -155,9 +188,7 @@ namespace knifehit
         {
             yield return new WaitForSeconds(time);
             HideGameUI();
-            ShowMainMenu();
-            _currentKnife.GetComponent<Knife>().knifeHit -= OnKnifeHit;
-            _currentKnife.GetComponent<Knife>().gameOver -= OnGameOver;
+            ShowGameOverMenu();
             Dispose();
         }
 
@@ -166,9 +197,10 @@ namespace knifehit
             _gameUIObj.gameObject.SetActive(false);
         }
 
-        private void ShowMainMenu()
+        private void ShowGameOverMenu()
         {
-            _mainMenu.gameObject.SetActive(true);
+            _gameOverMenu.gameObject.SetActive(true);
+            _gameOverText.text = $"Levels cleared: {_currentLevel - 1}";
         }
 
         private IEnumerator AddKnifeWithDelay(float time)

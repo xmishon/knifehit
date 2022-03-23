@@ -9,5 +9,6 @@ namespace knifehit
         public string logName = "Log name";
         public Sprite logIcon;
         public Sprite logSprite;
+        public Sprite[] destroyedSprites;
     }
 }
