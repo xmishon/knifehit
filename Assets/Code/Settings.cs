@@ -13,6 +13,6 @@ namespace knifehit
         public int knifeNumMax = 6;
         public int knifeNumMinBoss = 5;
         public int knifeNumMaxBoss = 7;
-
+        public float knifeSpawnDelay = 0.1f;
     }
 }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c638d11f658930a428ea03bf8068c0a6, type: 3}
+  m_Name: SoundConfig
+  m_EditorClassIdentifier: 
+  buttonPressed: {fileID: 8300000, guid: bddcc28b12cffec4fa9d0aeeb8e2cba0, type: 3}
+  knifeThrown: {fileID: 8300000, guid: 36c267b35b701db41b6fd40aced97818, type: 3}
+  gameOver: {fileID: 8300000, guid: 0909cde834249ca4099bb597bf521738, type: 3}
+  backgroundSong: {fileID: 8300000, guid: 7970c2b87cb76f74796d0c36eedcef8b, type: 3}

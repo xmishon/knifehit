@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logPosition: {x: 0, y: 0, z: 0}
   knifePosition: {x: 0, y: -3.5, z: 0}
-  appleBonusProbability: 0.25
+  appleBonusProbability: 1
+  logKnifesMaxNumberAtStart: 3
+  knifeNumMin: 3
+  knifeNumMax: 6
+  knifeNumMinBoss: 5
+  knifeNumMaxBoss: 7

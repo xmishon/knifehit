@@ -10,6 +10,7 @@ namespace knifehit
 
         private GameObject _log;
         private Vector3 _rotation = new Vector3(0f, 0f, 0f);
+        private float _speed = 2.0f;
 
         public Log(GameObject log, AnimationCurve curve)
         {
@@ -31,7 +32,7 @@ namespace knifehit
         {
             _rotation.z = rotationCurve.Evaluate(Timer.levelTime) * Time.deltaTime;
             _rotation.z /= 0.0174533f; // radians to deegrees
-            _log.transform.Rotate(_rotation);
+            _log.transform.Rotate(_rotation * _speed);
         }
     }
 }
