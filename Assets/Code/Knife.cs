@@ -27,6 +27,9 @@ namespace knifehit
                     gameObject.transform.SetParent(collision.transform);
                     isHit = true;
                     _knifeHitLog.Play();
+                    GameObject particles = Instantiate(Resources.Load<GameObject>(Names.FLINDERS));
+                    particles.transform.position = collision.GetContact(0).point;
+                    Destroy(particles, 2.0f);
                 }
                 else
                 {

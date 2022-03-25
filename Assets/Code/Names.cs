@@ -8,5 +8,6 @@
         public const string APPLE = "Apple";
         public const string DESTROYED_APPLE = "DestroyedApple";
         public const string SETTINGS_FILE = "ScriptableObjects/MainSettings";
+        public const string FLINDERS = "Flinders";
     }
 }
